@@ -1,0 +1,136 @@
+#macos-icon                                           = custom-style
+#macos-icon-frame                                     = plastic
+#macos-icon-ghost-color                               = #efefef
+#macos-icon-screen-color                              = #0a2a51
+
+adjust-cursor-thickness                               = 20
+cursor-style                                          = block
+cursor-style-blink                                    = false
+cursor-opacity = 0.8
+bold-color                                            = bright
+link-url                                              = true
+mouse-hide-while-typing                               = true
+window-save-state                                     = always
+
+
+quit-after-last-window-closed                         = true
+#initial-command="ls -la"
+
+#window-padding-x                                     = 2,1
+#window-padding-y                                     = 6,1
+window-padding-color                                  = extend
+# ------------------------------------------
+# 1. 外观与主题 (Theme & Appearance)
+# ------------------------------------------
+#theme                                                = "Catppuccin Mocha"
+#theme                                                = "iTerm2 Smoooooth"
+#theme                                                = tokyonight
+#theme                                                = Adventure
+theme                                                 = light:Duckbones,dark:tokyonight
+#term                                                 = xterm-256color
+#background                                           = 282c34
+#background                                           = #020C20
+#foreground                                           = ffffff
+
+# 背景透明度 (0.0 到 1.0)
+#background-opacity                                   = 0.90
+#background-opacity                                   = 0.8
+#background-opacity                                   = 0.92
+# 开启背景模糊（毛玻璃效果，macOS 效果最好）
+#background-blur-radius                               = 20
+
+# ------------------------------------------
+# 2. 字体设置 (Typography)
+# ------------------------------------------
+# 推荐使用 Nerd Fonts（如 JetBrainsMono, FiraCode）
+#font-family                                          = "FiraCode Nerd Font"
+#font-family                                          = "JetBrains Mono Nerd Font"
+font-family                                           = "JetBrainsMono Nerd Font"
+#font-size                                            = 14
+#font-thicken                                         = true
+#font-thicken-strength                                = 255
+#font-feature                                         = -liga
+
+# 连字支持 (如把 !                                    = 显示为 ≠)
+#font-feature                                         = calt
+#font-feature                                         = liga
+
+# ------------------------------------------
+# 3. 窗口与内边距 (Window & Padding)
+# ------------------------------------------
+# 窗口四周的留白，让文字不贴边，看起来更舒服
+#window-padding-x                                     = 12
+#window-padding-y                                     = 12
+# 让 padding 区域的颜色和背景色一致
+#window-padding-color                                 = extend
+
+# 隐藏 macOS 顶部的标题栏 (macOS 专属美化)
+#macos-titlebar-style                                 = hidden
+macos-titlebar-style                                  = "transparent"
+
+# ------------------------------------------
+# 4. 光标与鼠标 (Cursor & Mouse)
+# ------------------------------------------
+# 光标样式: block(方块), bar(竖线), underline(下划线)
+#cursor-style                                         = block
+# 开启光标闪烁
+#cursor-style-blink                                   = true
+
+# 打字时隐藏鼠标指针
+#mouse-hide-while-typing                              = true
+# 选中文本自动复制到剪贴板
+# copy-on-select                                      = true
+
+# ------------------------------------------
+# 5. 终端行为 (Terminal Behavior)
+# ------------------------------------------
+# 滚动历史行数
+scrollback-limit                                      = 10000
+# 退出确认（防止误关）
+confirm-close-surface                                 = true
+
+# ------------------------------------------
+# 6. 分屏与标签页快捷键 (Keybindings)
+# ------------------------------------------
+# Ghostty 原生支持分屏（类似 tmux）和标签页
+# 清楚默认的某些不常用快捷键
+keybind                                               = clear
+
+keybind                                               = cmd+C=copy_to_clipboard
+keybind                                               = cmd+V=paste_from_clipboard
+
+
+# 标签页管理
+keybind                                               = cmd+t=new_tab
+keybind                                               = cmd+w=close_surface
+keybind                                               = ctrl+tab=next_tab
+keybind                                               = cmd+shift+tab=previous_tab
+
+# 分屏管理 (类似 iTerm2 快捷键)
+keybind                                               = cmd+d=new_split:right
+# 垂直分屏 (macOS)
+keybind                                               = cmd+shift+d=new_split:down
+# 水平分屏 (macOS)
+
+# 切换分屏焦点
+keybind                                               = ctrl+left=goto_split:left
+keybind                                               = ctrl+right=goto_split:right
+keybind                                               = ctrl+up=goto_split:top
+keybind                                               = ctrl+down=goto_split:bottom
+
+keybind                                               = cmd+shift+r=reload_config
+keybind                                               = ctrl+shift+p=toggle_command_palette
+keybind                                               = global:cmd+backquote=toggle_quick_terminal
+keybind                                               = ctrl+shift+f=toggle_fullscreen
+keybind                                               = ctrl+shift+m=toggle_maximize
+keybind                                               = ctrl+plus=increase_font_size:1
+keybind                                               = cmd+minus=decrease_font_size:1
+keybind = cmd+zero=reset_font_size
+
+# === 下拉终端（Quake 风格） ===
+quick-terminal-position = left
+quick-terminal-size = 20%,500px
+quick-terminal-screen = mouse
+quick-terminal-autohide = true
+quick-terminal-animation-duration = 0.15
+quick-terminal-autohide = false

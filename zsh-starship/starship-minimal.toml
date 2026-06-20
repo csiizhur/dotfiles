@@ -1,0 +1,61 @@
+# Starship 极简配置
+# 参考: https://starship.rs/config/
+
+# 基础格式 - 单行简洁
+format = "$directory$git_branch$git_status$character"
+
+# 字符 - 小箭头
+[character]
+success_symbol = " ›"
+error_symbol = " ›"
+vimcmd_symbol = " ·"
+
+# 目录 - 简洁风格
+[directory]
+format = "[$path]($style)($read_only)"
+style = "bold blue"
+read_only = "RO"
+read_only_style = "bold red"
+truncation_length = 2
+truncation_symbol = "…/"
+
+# Git 分支 - 纯文本
+[git_branch]
+format = " on [$branch]($style)"
+style = "purple"
+
+# Git 状态 - 简洁符号
+[git_status]
+format = " [$modified$staged$untracked]($style)"
+style = "yellow"
+modified = "!"
+staged = "+"
+untracked = "?"
+diverged = "⇕"
+conflicted = "×"
+ahead = "↑"
+behind = "↓"
+deleted = "✘"
+
+# Node.js - 简洁
+[nodejs]
+format = " [node($version)]($style)"
+style = "green"
+
+# Python - 简洁
+[python]
+format = " [py($version)]($style)"
+style = "yellow"
+pyenv_version_name = true
+
+# Golang - 简洁
+[golang]
+format = " [go($version)]($style)"
+style = "cyan"
+
+# 命令执行时间 - 只在超过3秒时显示
+[cmd_duration]
+format = " [$duration]($style)"
+style = "dimmed white"
+min_time = 3000
+show_milliseconds = false

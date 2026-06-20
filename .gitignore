@@ -1,0 +1,12 @@
+README.md
+.DS_Store
+.idea/
+git/.gitconfig
+npm/
+alacritty/
+ssh/
+claude/.claude/plugins/cache/
+claude/.claude/plugins/.DS_Store
+claude/.claude/plugins/.last_inuse_sweep
+claude/.claude/skills/
+claude/.claude/settings.json

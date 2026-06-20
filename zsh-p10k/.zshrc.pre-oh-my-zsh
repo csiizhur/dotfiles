@@ -1,0 +1,238 @@
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# shell zsh
+# 这行必须在source oh-my-zsh.sh之前
+#fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+#export ZSH=$HOME/.oh-my-zsh
+if [[ $name_S == "Darwin" ]] {
+    ZSH_THEME="apple"
+} else {
+    ZSH_THEME="robbyrussell"
+}
+# omz sh
+#source $ZSH/oh-my-zsh.sh
+#source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+ENABLE_CORRECTION="true"
+plugins=(
+	git
+    archlinux
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+    zsh-completions
+    # git状态
+    git-prompt
+    vscode
+)
+
+# 终端大小写不敏感
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
+
+# User configuration
+# hexo博客
+# hexo发布github的token（通过 1Password/环境变量 注入，不硬编码）
+# export GITHUB_TOKEN_FOR_HEXO=
+# hexo访问统计 基于Google Analytics
+# https://analytics.google.com/analytics/web/provision/#/p414334579/reports/intelligenthome
+export GA_MEASUREMENT_ID=6344341407
+export GA_TRACKING_ID=G-N6M7VZCQMD
+
+# clash代理
+#export http_proxy=http://127.0.0.1:7890
+#export https_proxy=http://127.0.0.1:7890
+#export all_proxy=socks5://127.0.0.1:7890
+
+# hexo博客
+export HEXO_BLOG_DIR=~/MyDev/doc/Bannirui.github.io
+
+name_S=$(uname -s 2>/dev/null || echo not)
+if [[ $name_S == "Darwin" ]] {
+    # macos
+    # ll
+    alias ll='ls -aLF'
+    # python默认版本问题
+    alias py='/usr/local/bin/python3'
+    alias python='/usr/local/bin/python3'
+    alias pip='/usr/local/bin/pip3'
+    # cython
+    export CYTHON_HOME="/usr/local/Cellar/cython/3.0.10"
+    export PATH=$PATH:$CYTHON_HOME/bin
+    # pipenv
+    export PIPENV_HOME="/usr/local/Cellar/pipenv/2024.0.1"
+    export PATH=$PATH:$PIPENV_HOME/bin
+    # mysql
+    export PATH=$PATH:"/usr/local/opt/mysql@8.0/bin"
+    export STM32_PRG_PATH=/Users/dingrui/MyApp/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin
+    export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
+    name_M=$(uname -m 2>/dev/null || echo not)
+    if [[ $name_M == "arm64" ]]; then
+        # arm架构
+        # jdk环境
+        export JDK8_HOME="/Users/zhurun/Library/Java/JavaVirtualMachines/corretto-1.8.0_452/Contents/Home"
+        export JDK17_HOME="/usr/local/Cellar/openjdk@17/17.0.8.1"
+        export JDK20_HOME="/usr/local/Cellar/openjdk/20.0.2"
+        export JDK21_HOME="/usr/local/Cellar/openjdk@21/21.0.4"
+        alias jdk8="export JAVA_HOME=$JDK8_HOME"
+        alias jdk17="export JAVA_HOME=$JDK17_HOME"
+        alias jdk20="export JAVA_HOME=$JDK20_HOME"
+        alias jdk21="export JAVA_HOME=$JDK21_HOME"
+        # default jdk8
+        export JAVA_HOME=$JDK8_HOME
+        export PATH=$PATH:$JAVA_HOME/bin
+        # maven
+        export MAVEN_HOME="/opt/homebrew/Cellar/maven/3.9.10"
+        export PATH=$PATH:$MAVEN_HOME/bin
+        # bison 编译c项目可能需要
+        export BISON_HOME="/opt/homebrew/Cellar/bison/3.8.2"
+        export PATH="$BISON_HOME/bin:$PATH"
+        export LDFLAGS="-L$BISON_HOME/lib"
+        # golang dev env
+        export GO_HOME="/opt/homebrew/Cellar/go/1.24.3/libexec"
+        export GOPATH="/Users/dingrui/MyDev/env/go"
+        export GO111MODULE=on
+        export PATH=$PATH:$GO_HOME/bin:$GOPATH/bin
+    else
+        # x86架构
+        # jdk环境
+        export JDK8_HOME="/usr/local/Cellar/openjdk@8/1.8.0-392"
+        export JDK17_HOME="/usr/local/Cellar/openjdk@17/17.0.8.1"
+        export JDK20_HOME="/usr/local/Cellar/openjdk/20.0.2"
+        export JDK21_HOME="/usr/local/Cellar/openjdk@21/21.0.4"
+        alias jdk8="export JAVA_HOME=$JDK8_HOME"
+        alias jdk17="export JAVA_HOME=$JDK17_HOME"
+        alias jdk20="export JAVA_HOME=$JDK20_HOME"
+        alias jdk21="export JAVA_HOME=$JDK21_HOME"
+        # default jdk8
+        export JAVA_HOME=$JDK8_HOME
+        export PATH=$PATH:$JAVA_HOME/bin
+        # maven
+        export MAVEN_HOME="/usr/local/Cellar/maven/3.9.4"
+        export PATH=$PATH:$MAVEN_HOME/bin
+        # bison 编译c项目可能需要
+        export BISON_HOME="/usr/local/Cellar/bison/3.8.2"
+        export PATH="$BISON_HOME/bin:$PATH"
+        # 编译openjdk源码时先执行unset LDFLAGS
+        export LDFLAGS="-L$BISON_HOME/lib"
+        # gcc
+        export GCC_HOME="/usr/local/Cellar/gcc@12/12.3.0"
+        export PATH=$PATH:$GCC_HOME/bin
+
+        # 编译openjdk源码时的编译设置
+        # 设定语言选项，必须设置
+        export CC=/usr/bin/clang
+        export CXX=/usr/bin/clang++
+        # 跳过clang的一些严格的语法检查
+        export COMPILER_WARNINGS_FATAL=true
+        # 链接时使用的参数
+        export LFLAGS='-Xlinker -lstdc++'
+        # 是否使用clang
+        export USE_CLANG=true
+        # 使用64位数据模型
+        export LP64=1
+        # 告诉编译平台是64位 不然会按32位来编译
+        export ARCH_DATA_MODEL=64
+        # 允许自动下载依赖
+        export ALLOW_DOWNLOADS=true
+        # 并行编译的线程数
+        export HOTSPOT_BUILD_JOBS=2
+        # 是否跳过与先前版本的比较
+        export SKIP_COMPARE_IMAGES=true
+        # 是否使用预编译头文件 加快编译速度
+        export USE_PRECOMPILED_HEADER=true
+        # 是否使用增量编译
+        export INCREMENTAL_BUILD=true
+        # 编译内容
+        export BUILD_LANGTOOLS=true
+        export BUILD_JAXP=true
+        export BUILD_JAXWS=true
+        export BUILD_CORBA=true
+        export BUILD_HOTSPOT=true
+        export BUILD_JDK=true
+        # 编译版本
+        export SKIP_DEBUG_BUILD=true
+        export SKIP_FASTDEBUG_BUILD=false
+        export DEBUG_NAME=debug
+        # 避开javaws和浏览器Java插件之类的部分的build
+        export BUILD_DEPLOY=false
+        export BUILD_INSTALL=false
+        # 终端输入乱码
+        export LANG=zh_CN.UTF-8
+        export LC_ALL=zh_CN.UTF-8
+        # arm-none-eabi-gcc指定10.3版本在homebrew上没有 手动安装设置环境变量
+        export ARM_NONE_EABI_HOME=~/MyApp/arm-none-eabi
+        export PATH=$PATH:$ARM_NONE_EABI_HOME/bin
+        # golang dev env
+        export GO_HOME="/usr/local/Cellar/go/1.21.0/libexec"
+        export GOPATH="/Users/dingrui/MyDev/env/go"
+        export GO111MODULE=on
+        export PATH=$PATH:$GO_HOME/bin:$GOPATH/bin
+        # llvm clangd也是跟随着llvm的
+        export LLVM_HOME="/usr/local/opt/llvm"
+        export PATH=$PATH:$LLVM_HOME/bin
+    fi
+} elif [[ $name_S == "Linux" ]] {
+    # Linux
+    # jdk环境
+    export JDK8_HOME="/usr/lib/jvm/java-8-openjdk"
+    export JDK11_HOME="/usr/lib/jvm/java-11-openjdk"
+    export JDK15_HOME="/usr/lib/jvm/jdk15"
+    export JDK17_HOME="/usr/lib/jvm/openjdk-17"
+    export JDK21_HOME="/usr/lib/jvm/jdk-21.0.7-oracle-x64"
+    export PATH=$PATH:$GOPATH/bin
+    alias jdk8="export JAVA_HOME=$JDK8_HOME"
+    alias jdk11="export JAVA_HOME=$JDK11_HOME"
+    alias jdk15="export JAVA_HOME=$JDK15_HOME"
+    alias jdk17="export JAVA_HOME=$JDK17_HOME"
+    alias jdk21="export JAVA_HOME=$JDK21_HOME"
+    # default jdk
+    export JAVA_HOME=$JDK21_HOME
+    # yay上没有arm-none-eabi的10.3版本 手动安装设置环境变量
+    export ARM_NONE_EABI_HOME=~/Documents/software/arm-none-eabi
+    export PATH=$PATH:$ARM_NONE_EABI_HOME/bin
+    # golang dev env
+    export GO_HOME="/usr/local/go"
+    export GOPATH="/home/dingrui/MyDev/env/go"
+    export GO111MODULE=on
+    export PATH=$PATH:$GO_HOME/bin:$GOPATH/bin
+} else {
+    # maybe for windows
+}
+
+# 执行neofetch显示机器信息 但是idea使用zsh的时候显示neofetch信息就比较鸡肋了
+# 因此需要判定唤起zsh的父进程是不是jetbrains的ide终端
+# 判断父进程名中是否包含关键字
+# mac上
+#   - clion->/Applications/CLion.app/Contents/MacOS/clion
+#   - idea->Ultimate.app/Contents/MacOS/idea
+#   - vscode->--disable-features=CalculateNativeWinOcclusion,SpareRendererForSitePerProcess
+# linux上
+#   - clion->com.intellij.idea.Main
+#   - idea->com.intellij.idea.Main
+#   - vscode->--disable-features=CalculateNativeWinOccLusion,SpareRendererForSitePerProcess
+pid=`ps -ef|awk '$2=='$$'{print $3}'`
+pname=`ps -ef|awk -v pid=$pid '{if(pid==$2)print $NF}'`
+if (($pname[(I)idea])) ||
+    (($pname[(I)pycharm])) ||
+    (($pname[(I)clion])) ||
+    (($pname[(I)SpareRendererForSitePerProcess])) ||
+    (($pname[(I)variations-seed-version])) {
+    # jebtrains ide
+    # vscode
+} else {
+    #neofetch
+}
+
+export PATH="/usr/local/bin:$PATH"
+export PATH="/Users/zhurun/Downloads/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+#export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+export PATH=$PATH:~/Downloads/apache-maven-3.8.9/bin
+# nvm node version manager
+# nvm alias default 22.18.0
+# source ~/.nvm/nvm.sh && nvm use 22.18.0 && node -v
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
